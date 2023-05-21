@@ -14,4 +14,10 @@ const io = socketio(expressServer);
 io.on("connection", (socket) => {
     console.log(socket.id, "Has connected");
     socket.emit("messageFromServer", { data: "Welcome to the socketio server" });
+
+    socket.on("messageToServer", (dataFromClient) => {
+        console.log("Data :", dataFromClient);
+    });
 });
+
+//  

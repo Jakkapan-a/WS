@@ -7,17 +7,23 @@
     <title>Hello</title>
 </head>
 <body>
-    Socket IO
+    Socket IO theRightWay
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io('http://localhost:8000');
         socket.on('connect', () => {
             console.log(socket.id);
+            socket.emit('messageToServer', {data: 'Data from client'});
         });
 
         socket.on('messageFromServer', (dataFromServer) => {
             console.log(dataFromServer);
-            socket.emit('messageToServer', {data: 'Data from client'});
+        });
+
+        socket.io.on('reconnect', (attemptNumber) => {
+            console.log('Reconnected attempNumber: ');
+            console.log(attemptNumber);
         });
     </script>
 </body>
