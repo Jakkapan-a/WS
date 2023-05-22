@@ -54,7 +54,7 @@
     <script>
         const socket = io('http://localhost:8001');
         socket.on('connect', () => {
-
+            console.log(socket.id);
         });
   
         socket.on('messageFromServer', (dataFromServer) => {
@@ -70,6 +70,9 @@
             event.preventDefault();
             const newMessage = document.querySelector('#user-message').value;
             socket.emit('newMessageToServer', {text: newMessage});
+            // Clear input
+            
+            document.querySelector('#user-message').value = '';
         });
 
     </script>
